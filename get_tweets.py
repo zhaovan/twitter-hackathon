@@ -10,35 +10,37 @@ auth.set_access_token(credentials.access_token,
 
 api = tweepy.API(auth)
 
-#public_tweets = api.home_timeline()
-#for tweet in public_tweets:
-#    print(tweet.text)
-
-def getTweets (keyWord, date):
+# This can be used for #s and ip of the user
+def getTweets (keyWord):
     keyWord = keyWord + " -filter:retweets" # Filters retweets
     tweets = tweepy.Cursor(api.search,
-                       q=keyWord,
-                       lang="en",
-                       since=date).items(5)
+                       q=keyWord).items(5) # only returns 5 tweets, but it can be changed
     tweetsList = []
     for tweet in tweets:
         tweetElement = [tweet.user.screen_name,tweet.text, tweet.id]
         try:
-            tweetElement.append(tweet.coordinates.coordinates)
+            tweetElement.append(tweet.place.id) # If the user doesnt share their location
         except:
             tweetElement.append(None)
         try:
-            tweetElement.append(tweet.possibly_sensitive)
+            tweetElement.append(tweet.possibly_sensitive) # This field only surfaces when a Tweet contains a link
         except:
             tweetElement.append(None)
         tweetsList.append(tweetElement)
     # DataFrame with the users (string), the tweet (string), the tweet id (Int64)
-    # their location where the tweet was made (coordinates) and if the tweet is sensitive
+    # their location where the tweet was made (coordinates) and if the tweet is sensitive (boolean)
     tweet_text = pd.DataFrame(data=tweetsList,
                               columns=['user',  "tweet", "tweetID", "location", "sensitive"])
     return tweetsList
 
+# function to get the text of each tweet for the other api we are using
+def getTweetsText(tweetsList):
+    tweetsList.get("tweet")
+    
 
 
-#getTweets("#cats","2017-04-03")
 
+
+
+# print(getTweets("74.125.19.104"))
+# print(getTweets("#cats"))
