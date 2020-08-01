@@ -36,7 +36,7 @@ def getTweets (keyWord, date):
     # their location where the tweet was made (coordinates) and if the tweet is sensitive
     tweet_text = pd.DataFrame(data=tweetsList,
                               columns=['user', "location", "tweet", "sensitive"])
-    print(tweetsList)
+    return tweetsList
 
 
 
