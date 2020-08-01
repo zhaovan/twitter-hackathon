@@ -22,7 +22,7 @@ def getTweets (keyWord, date):
                        since=date).items(5)
     tweetsList = []
     for tweet in tweets:
-        tweetElement = [tweet.user.screen_name,tweet.text]
+        tweetElement = [tweet.user.screen_name,tweet.text, tweet.id]
         try:
             tweetElement.append(tweet.coordinates.coordinates)
         except:
@@ -32,10 +32,10 @@ def getTweets (keyWord, date):
         except:
             tweetElement.append(None)
         tweetsList.append(tweetElement)
-    # DataFrame with the users (string), the tweet (string),
+    # DataFrame with the users (string), the tweet (string), the tweet id (Int64)
     # their location where the tweet was made (coordinates) and if the tweet is sensitive
     tweet_text = pd.DataFrame(data=tweetsList,
-                              columns=['user', "location", "tweet", "sensitive"])
+                              columns=['user',  "tweet", "tweetID", "location", "sensitive"])
     return tweetsList
 
 
