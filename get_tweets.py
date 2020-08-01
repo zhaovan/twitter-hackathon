@@ -12,7 +12,7 @@ api = tweepy.API(auth)
 public_tweets = api.home_timeline()
 for tweet in public_tweets:
     print(tweet.text)
-    
+
 def getTweets (keyWord, date):
     tweets = tweepy.Cursor(api.search,
                        q=keyWord,
@@ -23,3 +23,4 @@ def getTweets (keyWord, date):
 
 
 getTweets("#cats","2017-04-03")
+
