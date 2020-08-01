@@ -11,11 +11,14 @@ auth.set_access_token(credentials.access_token,
 api = tweepy.API(auth)
 
 # This can be used for #s and ip of the user
+# returns dataframe with the info of the tweets
 def getTweets (keyWord):
     keyWord = keyWord + " -filter:retweets" # Filters retweets
     tweets = tweepy.Cursor(api.search,
                        q=keyWord).items(5) # only returns 5 tweets, but it can be changed
-    tweetsList = []
+    # DataFrame with the users (string), the tweet (string), the tweet id (Int64)
+    # their location where the tweet was made (coordinates) and if the tweet is sensitive (boolean)
+    tweetsList = pd.DataFrame()
     for tweet in tweets:
         tweetElement = [tweet.user.screen_name,tweet.text, tweet.id]
         try:
@@ -26,21 +29,24 @@ def getTweets (keyWord):
             tweetElement.append(tweet.possibly_sensitive) # This field only surfaces when a Tweet contains a link
         except:
             tweetElement.append(None)
-        tweetsList.append(tweetElement)
-    # DataFrame with the users (string), the tweet (string), the tweet id (Int64)
-    # their location where the tweet was made (coordinates) and if the tweet is sensitive (boolean)
-    tweet_text = pd.DataFrame(data=tweetsList,
-                              columns=['user',  "tweet", "tweetID", "location", "sensitive"])
+        tweet_serie = pd.Series({"user" : tweetElement[0],
+                                 "tweet" : tweetElement[1],
+                                 "tweetID" : tweetElement[2],
+                                 "location" : tweetElement[3],
+                                 "sensitive" : tweetElement[4]})
+        tweetsList = tweetsList.append(tweet_serie,ignore_index=True)
     return tweetsList
 
 # function to get the text of each tweet for the other api we are using
+# returns list with the texts of wach tweet
 def getTweetsText(tweetsList):
-    tweetsList.get("tweet")
-    
-
-
-
-
+    texts = tweetsList["tweet"]
+    textList = []
+    for text in texts:
+        data = text.split("https://") # Separates the urls
+        textList.append(data[0])
+    return textList
 
 # print(getTweets("74.125.19.104"))
-# print(getTweets("#cats"))
+#print(getTweets("#cats"))
+#print(getTweetsText(getTweets("#cats")))
