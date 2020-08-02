@@ -1,7 +1,7 @@
 import tweepy
 import credentials
 import pandas as pd
-import socket
+
 
 auth = tweepy.OAuthHandler(credentials.consumer_key,
                            credentials.consumer_secret)
