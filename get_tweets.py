@@ -52,11 +52,6 @@ def getJson(tweetList):
     json = tweetList.to_json()
     return json
 
-# function that returns the users ip adress so we can use it to get local tweets
-def getUserIp():
-    hostname = socket.gethostname()
-    return  socket.gethostbyname(hostname)
-
 # print(getTweets("74.125.19.104"))
 # print(getTweets("#cats"))
 # print(getTweetsText(getTweets("#cats")))
