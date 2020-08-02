@@ -1,7 +1,7 @@
 import tweepy
 import credentials
 import pandas as pd
-
+import socket
 
 auth = tweepy.OAuthHandler(credentials.consumer_key,
                            credentials.consumer_secret)
@@ -51,6 +51,11 @@ def getTweetsText(tweetsList):
 def getJson(tweetList):
     json = tweetList.to_json()
     return json
+
+# function that returns the users ip adress so we can use it to get local tweets
+def getUserIp():
+    hostname = socket.gethostname()
+    return  socket.gethostbyname(hostname)
 
 # print(getTweets("74.125.19.104"))
 # print(getTweets("#cats"))
