@@ -3,4 +3,4 @@ venv/
 __pycache__/
 venv_3/
 .idea/
-
+crdentials.py
