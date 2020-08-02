@@ -47,7 +47,7 @@ def getTweetsText(tweetsList):
         textList.append(data[0])
     return textList
 
-# funtion that changes the data frame to a json
+# function that changes the data frame to a json
 def getJson(tweetList):
     json = tweetList.to_json()
     return json
