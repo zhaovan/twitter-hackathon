@@ -52,6 +52,13 @@ def getJson(tweetList):
     json = tweetList.to_json()
     return json
 
+#funtion to generate dataset
+def getTweet(id):
+    tweet = api.get_status(id)
+    text = tweet.text
+    data = text.split("https://")
+    return data[0]
+
 # print(getTweets("74.125.19.104"))
 # print(getTweets("#cats"))
 # print(getTweetsText(getTweets("#cats")))
