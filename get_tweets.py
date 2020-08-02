@@ -10,7 +10,7 @@ auth.set_access_token(credentials.access_token,
 
 api = tweepy.API(auth)
 
-# This can be used for #s and ip of the user
+# This can be used for #s
 # returns dataframe with the info of the tweets
 
 
@@ -67,9 +67,28 @@ def getTweetsText(tweetsList):
         textList.append(data[0])
     return textList
 
+<<<<<<< HEAD
 # funtion that changes the data frame to a json
 
 
 def getJson(tweetList):
     json = tweetList.to_json()
     return json
+=======
+# function that changes the data frame to a json
+def getJson(tweetList):
+    json = tweetList.to_json()
+    return json
+
+#funtion to generate dataset
+def getTweet(id):
+    tweet = api.get_status(id)
+    text = tweet.text
+    data = text.split("https://")
+    return data[0]
+
+# print(getTweets("74.125.19.104"))
+# print(getTweets("#cats"))
+# print(getTweetsText(getTweets("#cats")))
+# print(getJson(getTweets("#cats")))
+>>>>>>> a5da752294d2f17e8812bc676e41acc2139a2a81
