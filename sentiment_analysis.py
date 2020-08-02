@@ -33,3 +33,4 @@ def get_text_sentiment(text):
     except ApiException as ex:
         print("Method failed with status code " +
               str(ex.code) + ": " + ex.message)
+        return None
