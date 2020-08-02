@@ -47,6 +47,11 @@ def getTweetsText(tweetsList):
         textList.append(data[0])
     return textList
 
+def getJson(tweetList):
+    json = tweetList.to_json()
+    return json
+
 # print(getTweets("74.125.19.104"))
-#print(getTweets("#cats"))
-#print(getTweetsText(getTweets("#cats")))
+# print(getTweets("#cats"))
+# print(getTweetsText(getTweets("#cats")))
+# print(getJson(getTweets("#cats")))
