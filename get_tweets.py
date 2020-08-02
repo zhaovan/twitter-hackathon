@@ -10,7 +10,7 @@ auth.set_access_token(credentials.access_token,
 
 api = tweepy.API(auth)
 
-# This can be used for #s and ip of the user
+# This can be used for #s
 # returns dataframe with the info of the tweets
 def getTweets (keyWord):
     keyWord = keyWord + " -filter:retweets" # Filters retweets
