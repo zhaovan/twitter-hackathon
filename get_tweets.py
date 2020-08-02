@@ -59,6 +59,8 @@ def getTweet(id):
     data = text.split("https://")
     return data[0]
 
+
+
 # print(getTweets("74.125.19.104"))
 # print(getTweets("#cats"))
 # print(getTweetsText(getTweets("#cats")))
