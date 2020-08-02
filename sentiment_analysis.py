@@ -19,11 +19,6 @@ tone_analyzer.set_service_url(
 # Pottentially need this if it requires the server to do this (no clue tbh)
 # tone_analyzer.set_disable_ssl_verification(True)
 
-default_text = 'Team, I know that times are tough! Product '\
-    'sales have been disappointing for the past three '\
-    'quarters. We have a competitive product, but we '\
-    'need to do a better job of selling it!'
-
 
 def get_text_sentiment(text):
     try:
@@ -31,11 +26,10 @@ def get_text_sentiment(text):
             {'text': text},
             content_type='application/json'
         ).get_result()
-        print(json.dumps(tone_analysis, indent=2))
+
+        return tone_analysis
+
         # Invoke a Tone Analyzer method
     except ApiException as ex:
         print("Method failed with status code " +
               str(ex.code) + ": " + ex.message)
-
-
-get_text_sentiment(default_text)
